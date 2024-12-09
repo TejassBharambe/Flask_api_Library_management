@@ -45,7 +45,7 @@ This is a RESTful API for a **Library Management System** built using Flask. The
 
    pip install flask
 ```
-### 2. ** run the following command **
+### 2. **run the following command**
 
 ```bash
 python app.py
