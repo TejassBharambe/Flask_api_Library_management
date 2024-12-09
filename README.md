@@ -53,19 +53,18 @@ python -m unittest test.py # run in another terminal
 ```
 
 
-# Assumptions and Limitations
+# Design Choices
 
 ## In-memory Database
-- **Data Loss**: The application utilizes an in-memory database, which means that all data is lost when the server is restarted. This limitation affects the persistence of user data and application state.
+- **Description**: For simplicity, the application uses in-memory lists (books and members) as databases. This approach allows for fast prototyping and development but does not provide data persistence across server restarts.
 
-## Authentication
-- **Hardcoded Credentials**: The login credentials for the application are hardcoded. This approach poses a security risk and limits flexibility.
-- **Non-persistent Authentication**: Authentication does not persist after the server restarts, requiring users to log in again each time the server is restarted.
+## Token-based Authentication
+- **Description**: To secure the API, all CRUD operations are protected with token-based authentication. A token is generated upon successful login and must be included in the header of requests to access protected resources.
+## Search and Pagination
+- **Description**: To handle large amounts of data efficiently, both search and pagination features are implemented:
+  - **Search**: Allows filtering of books by title and/or author.
+  - **Pagination**: Splits large datasets into smaller, manageable chunks to prevent overwhelming the client and improve performance.
 
-## Data Validation
-- **Lack of Advanced Validation**: The application does not perform detailed validation of user inputs. For example:
-  - Email addresses are not validated for proper format.
-  - There is no mechanism to ensure that book titles are unique within the database.
 
 
 # Tests Include
@@ -84,16 +83,19 @@ python -m unittest test.py # run in another terminal
 - **Purpose**: Tests the search functionality for books by title, ensuring that relevant results are returned based on user input.
 
 
-# Design Choices
+# Assumptions and Limitations
 
 ## In-memory Database
-- **Description**: For simplicity, the application uses in-memory lists (books and members) as databases. This approach allows for fast prototyping and development but does not provide data persistence across server restarts.
+- **Data Loss**: The application utilizes an in-memory database, which means that all data is lost when the server is restarted. This limitation affects the persistence of user data and application state.
 
-## Token-based Authentication
-- **Description**: To secure the API, all CRUD operations are protected with token-based authentication. A token is generated upon successful login and must be included in the header of requests to access protected resources.
+## Authentication
+- **Hardcoded Credentials**: The login credentials for the application are hardcoded. This approach poses a security risk and limits flexibility.
+- **Non-persistent Authentication**: Authentication does not persist after the server restarts, requiring users to log in again each time the server is restarted.
 
-## Search and Pagination
-- **Description**: To handle large amounts of data efficiently, both search and pagination features are implemented:
-  - **Search**: Allows filtering of books by title and/or author.
-  - **Pagination**: Splits large datasets into smaller, manageable chunks to prevent overwhelming the client and improve performance.
+## Data Validation
+- **Lack of Advanced Validation**: The application does not perform detailed validation of user inputs. For example:
+  - Email addresses are not validated for proper format.
+  - There is no mechanism to ensure that book titles are unique within the database.
+
+
 
