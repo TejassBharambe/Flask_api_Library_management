@@ -43,7 +43,7 @@ This is a RESTful API for a **Library Management System** built using Flask. The
    source venv/bin/activate  # For macOS/Linux
    venv\Scripts\activate     # For Windows
 
-   pip install -r requirements.txt
+   pip install flask
 ```
 ### 2. ** run the following command **
 
